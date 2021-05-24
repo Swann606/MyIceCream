@@ -1,0 +1,18 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+
+    <h1>Inscription</h1>
+
+   {#  {% form_theme formRegistration 'bootstrap_4_layout.html.twig' %} #}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-success">Je m'inscris</button>
+
+    {{form_end(form)}}
+
+
+
+{% endblock %}
