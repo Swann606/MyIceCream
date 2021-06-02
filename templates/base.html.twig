@@ -33,7 +33,31 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('create_recipe')}}">Partager ses recettes</a>
                     </li>
-                    <li class="nav-item dropdown">
+
+
+                    {% if not app.user %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('security_registration')}}">Inscription</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('security_login')}}">Connexion</a>
+                    </li>
+
+                    {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('')}}">Mon compte</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('security_logout')}}">Deconnexion</a>
+                    </li>
+
+                    {% endif %}
+
+{#                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon compte</a>
                         <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Action</a>
@@ -42,7 +66,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Separated link</a>
                         </div>
-                    </li>
+                    </li> #}
                 </ul>
             </div>
         </nav>

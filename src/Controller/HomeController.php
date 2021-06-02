@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Recipe;
+use App\Entity\Comment;
+use App\Form\RecipeType;
+use App\Form\CommentType;
 
-use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use App\Repository\RecipeRepository;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-use App\Form\RecipeType;
-use App\Entity\Recipe;
-use App\Repository\RecipeRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -97,10 +99,29 @@ class HomeController extends AbstractController
     /**
      * @Route("/recipe/{id}", name="recipeDatasheet")
      */
-    public function recipeDatasheet(Recipe $recipe)
+    public function recipeDatasheet(Recipe $recipe, Request $request, EntityManagerInterface $manager)
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $comment->setCreatedAt(new \DateTime())
+                    ->setArticle($article);
+
+
+            $manager->persist($comment);
+            $manager->flush();
+
+            return $this->redirectToRoute('recipeDatasheet', ['id'=>$recipe->getId()]);
+
+        }
+
         return $this->render('home/recipe.html.twig', [
-            'recipe' => $recipe
+            'recipe' => $recipe,
+            'commentForm' => $form->createView()
         ]);
     }
 

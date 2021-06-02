@@ -2,40 +2,48 @@
 
 {% block body %}
 
-<h1> Partage ta recette </h1>
+    <h1> Partage ta recette </h1>
 
-{% form_theme formRecipe 'bootstrap_4_layout.html.twig' %}
-
-
-{{ form_start(formRecipe) }}
-
-{{ form_label(formRecipe.title, 'Titre')}}
-{{ form_widget (formRecipe.title, {'attr': {'placeholder' : "Nom du dessert" }}) }}<br>
-
-{{ form_label(formRecipe.category, 'Catégorie de dessert')}}
-{{ form_widget (formRecipe.category, {'attr': {'placeholder' : "Nom du dessert" }}) }}<br>
-
-{{ form_label(formRecipe.color, 'Couleur')}}
-{{ form_widget(formRecipe.color) }}
-
-{{ form_label(formRecipe.ingredients, 'Ingrédients')}}
-{{ form_widget(formRecipe.ingredients, {'attr': {'placeholder' :'Liste des ingrédients' }}) }}<br>
-
-{{ form_label(formRecipe.description, 'Description')}}
-{{ form_widget(formRecipe.description, {'attr': {'placeholder' :'Description du déroulé de la recette' }}) }}<br>
+    {# {% form_theme formRecipe 'bootstrap_4_layout.html.twig' %} #}
 
 
-<button type="submit" class="btn btn-success">
+    {{ form_start(formRecipe) }}
 
-    {% if editMode %}
-        Enregistrer les modifications
-    {% else %}
-        Ajouter la recette
-    {% endif %} 
+    {{ form_label(formRecipe.title, 'Titre')}}
+    {{ form_widget (formRecipe.title, {'attr': {'placeholder' : "Nom du dessert" }}) }}<br>
+
+    {{ form_label(formRecipe.category, 'Catégorie de dessert')}}
+    {{ form_widget (formRecipe.category, {'attr': {'placeholder' : "Nom du dessert" }}) }}<br>
+
+    {{ form_label(formRecipe.color, 'Couleur')}}
+    {{ form_widget(formRecipe.color) }}
+
+    {{ form_label(formRecipe.ingredients, 'Ingrédients')}}
+    {{ form_widget(formRecipe.ingredients, {'attr': {'placeholder' :'Liste des ingrédients' }}) }}<br>
+
+    {{ form_label(formRecipe.description, 'Description')}}
+    {{ form_widget(formRecipe.description, {'attr': {'placeholder' :'Description du déroulé de la recette' }}) }}<br>
+
+
+        {% if app.user %}
+            <button type="submit" class="btn btn-success">
+
+                {% if editMode %}
+                    Enregistrer les modifications
+                {% else %}
+                    Ajouter la recette
+                {% endif %} 
+                
+            </button>
+
+    {{form_end(formRecipe)}}
+
+        {% else %}
+
+        <h4>Connecte-toi pour laisser un commentaire</h4>
+        <button href ="{{path('security_login')}}" class="btn btn-success">Se Connecter</button>
+
+        {% endif %}
+
     
-</button>
-
-{{form_end(formRecipe)}}
-
-
 {% endblock %}

@@ -100,22 +100,42 @@
 
             </articles> 
 
-            <section id = 'commentaires'>
-            <br>
+            <section id = 'commentaires'><br>
+                <H4>{{recipe.comments | length}} commentaire(s) :</H4>
 
-            {% for comment in recipe.comments  %}
-                <div class="comment">
-                    <div class="row">
-                        <div class="col-3">
-                            {{comment.author}}                                       
-                            {{comment.createdAt | date ('d/m/Y à H:i')}}
+                <br>
+
+                {% for comment in recipe.comments  %}
+                    <div class="comment">
+                        <div class="row">
+                            <div class="col-3">
+                                {{comment.author}}                                       
+                                {{comment.createdAt | date ('d/m/Y à H:i')}}
+                            </div>
+                            <div class="col">
+                                {{comment.content}}
+                            </div>
                         </div>
-                        <div class="col">
-                            {{comment.content}}
-                        </div>
-                    </div>
-                </div><br>  
+                    </div><br>  
                 {% endfor %}
+
+                {% if app.user %}
+                    {{form_start(commentForm)}}
+                    {{form_row(commentForm.author, {'attr': {'placeholder': "Votre nom"}})}}
+                    {{form_row(commentForm.content, {'attr': {'placeholder': "Votre commentaire"}})}}
+
+                    <button type="submit" class="btn btn-success">Envoyer</button>
+
+                {{form_end(commentForm)}}
+                    
+                {% else %}
+
+                <h4>Connecte-toi pour laisser un commentaire</h4>
+                <button href ="{{path('security_login')}}" class="btn btn-success">Se Connecter</button>
+
+                {% endif %}
+
+                
             </section>
 
 
