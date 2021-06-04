@@ -1,5 +1,7 @@
 {% extends 'base.html.twig'%}
 
+
+
 {% block body %}
 
             <articles>
@@ -98,6 +100,17 @@
                 <div class ="ingredient_list">  {{recipe.ingredients}}</div>
                 <div class ="description">  {{recipe.description}}</div>
 
+                <a href="{{ path('recipe_like',{'id':recipe.id}) }}" class="btn btn-link js-recipeLike">
+                    {# icone à remplacer par des SVG #}
+                    {% if app.user and recipe.isLikedByUser(app.user) %}
+                        <i class="fas fa-heart"></i>
+                        {% else %}
+                        <i class="far fa-heart red"></i>
+                        {% endif %}
+                    <span class="js-recipeLikes">{{recipe.recipeLikes | length}}</span>
+                    <span class="js-label">J'aime</span>
+                </a>
+
             </articles> 
 
             <section id = 'commentaires'><br>
@@ -140,3 +153,14 @@
 
 
 {% endblock %}
+
+{% block javascripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src ="../assets/scripts/recipeLike.js"></script>
+    
+{% endblock %}
+
+
+
+

@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\RecipeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\User;
+use App\Entity\RecipeLike;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RecipeRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -61,9 +63,15 @@ class Recipe
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=RecipeLike::class, mappedBy="recipe")
+     */
+    private $recipeLikes;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->recipeLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -171,5 +179,50 @@ class Recipe
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|RecipeLike[]
+     */
+    public function getRecipeLikes(): Collection
+    {
+        return $this->recipeLikes;
+    }
+
+    public function addRecipeLike(RecipeLike $recipeLike): self
+    {
+        if (!$this->recipeLikes->contains($recipeLike)) {
+            $this->recipeLikes[] = $recipeLike;
+            $recipeLike->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipeLike(RecipeLike $recipeLike): self
+    {
+        if ($this->recipeLikes->removeElement($recipeLike)) {
+            // set the owning side to null (unless already changed)
+            if ($recipeLike->getRecipe() === $this) {
+                $recipeLike->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Permet de savoir si une recette à été liké
+     * 
+     * @return boolean
+     */
+
+    public function isLikedByUser(User $user) : bool {
+        foreach ($this->recipeLikes as $recipeLike) {
+            if($recipeLike->getUser() === $user) return true;
+        }
+
+        return false;
+        
     }
 }

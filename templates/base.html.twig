@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+
 
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
@@ -48,7 +50,7 @@
                     {% else %}
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{path('')}}">Mon compte</a>
+                        <a class="nav-link" href={# "{{path('')}}" #}>Mon compte</a>
                     </li>
 
                     <li class="nav-item">

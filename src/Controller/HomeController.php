@@ -7,10 +7,12 @@ use App\Entity\Comment;
 use App\Form\RecipeType;
 use App\Form\CommentType;
 
+use App\Entity\RecipeLike;
+
 use App\Repository\RecipeRepository;
 
+use App\Repository\RecipeLikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,7 +53,9 @@ class HomeController extends AbstractController
         ]);
     }
 
-    // 
+
+
+    
 
     /**
      * @Route("/recipe/create", name="create_recipe")
@@ -73,7 +77,6 @@ class HomeController extends AbstractController
                         ->getForm(); */
 
         $form = $this ->createForm(RecipeType::class, $recipe);
-
 
         $form -> handleRequest($request);
 
@@ -137,5 +140,57 @@ class HomeController extends AbstractController
     } */
 
 
+
+    /**
+     * Permet de liker et unliker un article 
+     * 
+     * @Route("/recipe/{id}/like", name="recipe_like")
+     *
+     * @param Recipe $recipe
+     * @param EntityManagerInterface $manager
+     * @param RecipeLikeRepository $recipeLikerepo
+     * @return Response
+     */
+    public function like (Recipe $recipe, EntityManagerInterface $manager, RecipeLikeRepository $recipeLikeRepo ): Response{
+        
+        $user = $this -> getUser();
+
+        if(!$user){
+            
+            return $this->json([
+            'code' => 403,
+            'message' => "Unauthorised"
+            ],403);
+        }
+
+        if($recipe->isLikedByUser($user)) {
+            $recipeLike = $recipeLikeRepo->findOneBy([
+                'recipe' => $recipe,
+                'user' => $user
+            ]);
+            
+            $manager->remove($recipeLike);
+            $manager->flush();
+            
+            return $this->json([
+                'code' => 200,
+                'message' => "Like bien supprimé",
+                'recipelikes' => $recipeLikeRepo->count(['recipe' =>$recipe])
+            ],200);
+        }
+       
+        $recipeLike = new RecipeLike();
+        $recipeLike ->setRecipe($recipe)
+                    ->setUser($user);
+
+        $manager->persist($recipeLike);
+        $manager->flush();
+
+        return $this->json([
+            'code' =>200,
+            'message' => 'Like bien ajouté',
+            'recipeLikes' => $recipeLikeRepo->count(['recipe' => $recipe])
+        ],200);
+    }
 
 }
