@@ -50,7 +50,7 @@
                     {% else %}
 
                     <li class="nav-item">
-                        <a class="nav-link" href={# "{{path('')}}" #}>Mon compte</a>
+                        <a class="nav-link" href= "{{path('account',{'id': app.user.id})}}">Mon compte</a>
                     </li>
 
                     <li class="nav-item">
