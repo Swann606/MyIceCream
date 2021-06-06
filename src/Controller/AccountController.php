@@ -16,23 +16,23 @@ class AccountController extends AbstractController
     /**
      * @Route("/account/{id}", name="account")
      */
-    public function account(UserRepository $userRepo, RecipeRepository $recipeRepo )
+    public function account(RecipeRepository $recipeRepo, RecipeLikeRepository $recipeLikeRepo)
     {
        
-        $user = $userRepo -> findOneBy([
-            'id'=>$id
-            ]);
-
-        $recipes = $recipeRepo->findBy([
-            'user'=> $user
-            ]);
+        $user = $this -> getUser();
         
-        //$MyLikedRecipes = $recipeLikeRepo->findBy($user);
+        $recipes = $recipeRepo->findBy(['user'=> $user]);
+
+        $recipeLikes = $recipeLikeRepo->findBy(['user'=> $user]);
 
 
-        return $this->render('account.html.twig', [
+        dump($recipeLikes);
+        dump($recipes);
+       
+
+
+        return $this->render('account/account.html.twig', [
             'user'=>$user,
-            'recipes' =>$recipes
-        ]);
+            'recipes' => $recipes]);
     }
 }

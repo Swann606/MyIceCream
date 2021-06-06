@@ -5,9 +5,9 @@
 {% block body %}
 
             <articles>
-                <h3>{{ recipe.title }} </h3>
+                <h3>{{ recipe.title }}</h3>
                 
-                <div class="category"> {{recipe.category.title}}</div>
+                <div class="category">{{recipe.category.title}}</div>
 
                 <div class ="date"> Publiée le {{recipe.createdAt | date ('d/m/Y') }}</div>
 
