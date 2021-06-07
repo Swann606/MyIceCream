@@ -82,11 +82,16 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
+
+            $user = $this -> getUser();
+
             if (!$recipe->getId()){
-                $recipe->setCreatedAt(new \DateTime());
+
+                $recipe ->setCreatedAt(new \DateTime())
+                        ->setUser($user);
             }
 
-            $manager->persist($article);
+            $manager->persist($recipe);
             $manager->flush();
 
             return $this->redirectToRoute('recipeDatasheet', ['id' => $recipe->getId()]);
@@ -111,8 +116,11 @@ class HomeController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
+            $user = $this -> getUser();
+           
             $comment->setCreatedAt(new \DateTime())
-                    ->setArticle($article);
+                    ->setRecipe($recipe)
+                    ->setAuthor($user -> getUsername());
 
 
             $manager->persist($comment);
