@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\RecipeLikeRepository;
+use App\Entity\User;
+use App\Entity\Recipe;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RecipeLikeRepository;
 
 /**
  * @ORM\Entity(repositoryClass=RecipeLikeRepository::class)

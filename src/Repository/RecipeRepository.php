@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Recipe;
+use App\Entity\RecipeLike;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @method Recipe|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +21,52 @@ class RecipeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Recipe::class);
     }
+
+
+    /* public function findRecipeLikedByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('r')
+                    ->Select('r')
+                    ->Join('r.recipeLike','rl')
+                    ->Join('rl.user', 'u')
+                    ->Where('rl.user_id = $userId')
+                    ->getQuery()
+                    ->getResult();
+
+                    dump($qb);
+    }    */
+
+
+    /**
+     * Renvoie les X dernières recettes publiées
+     *
+     * @param [Integer] $x
+     * @return void
+     */
+        public function findLatest($x)
+        {
+            return $this ->createQuerybuilder('r')
+                        ->orderBy('r.createdAt', "desc")
+                        ->setMaxResults($x)
+                        ->getQuery()
+                        ->getResult();
+        }
+
+        /**
+         * Renvoie les X recettes avec le plus de like          *
+         * @param [Integer] $x
+         * @return void
+         */
+        public function findMostPopular($x){
+                $qb= $this ->createQuerybuilder('r')
+                            ->select($qb->expr()->countDistinct('c.id'))
+                            ->orderBy('r.recipe_like', "asc")
+                            ->setMaxResults($x)
+                            ->getQuery()
+                            ->getResult();
+
+                return $qb;
+        } 
 
     // /**
     //  * @return Recipe[] Returns an array of Recipe objects

@@ -21,23 +21,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    /**
-     * @Route("/home", name="home")
-     */
-    public function index(): Response
-    {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+
 
     /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(RecipeRepository $recipeRepo, RecipeLikeRepository $recipeLikeRepo)
     {
+        $lastRecipes = $recipeRepo->findLatest(8);
+
+
+       /* A remplacer par une requete dans recipe */
+        $recipeLike=$recipeLikeRepo->findMostLiked();
+
+        foreach ($recipeLikes as $recipeLike){
+            $recipeID[]=$recipeLike->getRecipe()->getId(); 
+        }
+ 
+        $recipeMostLike = $recipeRepo->findBy(['id' => $recipeID]);
+        
+
         return $this->render('home/home.html.twig', [
-            'controller_name' => 'HomeController',
+            'lastRecipes' => $lastRecipes,
+            'RecipeMostLike' => $recipeMostLike
         ]);
     }
 

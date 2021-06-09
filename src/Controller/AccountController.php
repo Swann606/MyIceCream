@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Recipe;
 use App\Repository\UserRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\RecipeLikeRepository;
@@ -23,16 +24,19 @@ class AccountController extends AbstractController
         
         $recipes = $recipeRepo->findBy(['user'=> $user]);
 
+        /* A remplacer par une requete dans recipe */
         $recipeLikes = $recipeLikeRepo->findBy(['user'=> $user]);
 
+       foreach ($recipeLikes as $recipeLike){
+           $recipeID[]=$recipeLike->getRecipe()->getId(); 
+       }
 
-        dump($recipeLikes);
-        dump($recipes);
-       
+       $recipeLiked = $recipeRepo->findBy(['id' => $recipeID]);
 
 
         return $this->render('account/account.html.twig', [
             'user'=>$user,
-            'recipes' => $recipes]);
+            'recipes' => $recipes,
+            'recipeLiked'=> $recipeLiked]);
     }
 }

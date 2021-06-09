@@ -133,7 +133,7 @@
     <section>
         <h3>Mes recettes préférées</h3>
 
-    {#         {% for recipe in recipes %}
+            {% for recipe in recipeLiked %}
 
                 <a href="{{path('recipeDatasheet', {'id' : recipe.id}) }}">
                     <div class="recipeCard">
@@ -240,7 +240,7 @@
                     </div>  
                 </a>
 
-            {% endfor %} #}
+            {% endfor %}
 
     </section>
 

@@ -4,6 +4,148 @@
 
     <h1> Bienvenue sur MyIceCream</h1>
 
+    <section class = "popularRecipe">
+
+    <h2>Les dernières recettes ajoutées<h2>
+
+        {% for recipe in lastRecipes %}
+
+            <a href="{{path('recipeDatasheet', {'id' : recipe.id}) }}">
+                <div class="recipeCard">
+                    <h3>{{ recipe.title }} </h3>
+
+                    <div class ="date"> Publiée le {{recipe.createdAt | date ('d/m/Y') }}</div>
+
+                    <div class="svgLogoContainer">
+                        <svg
+                        id="Capa_1"
+                        enable-background="new 0 0 512 512"
+                        height="70"
+                        viewBox="0 0 512 512"
+                        width="70"
+                        version="1.1">
+                        <defs
+                            id="defs32" />
+                        <g
+                            id="g27">
+                            <path
+                            d="m320.016 277.945 21.185-38.546c-14.401-2.1-25.201-14.399-25.201-29.399 0-8.401-6.599-15-15-15s-15 6.599-15 15c0 16.5-13.5 30-30 30s-30-13.5-30-30c0-8.401-6.599-15-15-15s-15 6.599-15 15c0 16.5-13.5 30-30 30-4.799 0-9.6 2.401-12.299 6.599-2.701 3.9-3.602 9.001-1.8 13.801l39 104.399 26.307-4.292-15.208 33.693 39.901 108.2c2.399 5.7 7.798 9.6 14.099 9.6s11.7-3.9 14.099-9.6l88.5-238.4z"
+                            fill="#ffffff"
+                            id="path2"
+                            style="fill:#ffbb33;fill-opacity:1" />
+                            <g
+                            id="Ice_Cream_1_"
+                            transform="translate(10e-4)"
+                            style="fill:#e68a2e;fill-opacity:1">
+                            <g
+                                id="g8"
+                                style="fill:#e68a2e;fill-opacity:1">
+                                <path
+                                d="m 360.099,260.4 -1.5,3.6 L 202,394.2 190.9,364.799 341.2,239.399 c 1.5,0.601 3,0.601 4.8,0.601 4.799,0 9.6,2.401 12.299,6.599 2.701,3.9 3.602,9.002 1.8,13.801 z"
+                                fill="#ffbb33"
+                                id="path6"
+                                style="fill:#e68a2e;fill-opacity:1" />
+                            </g>
+                            </g>
+                            <g
+                                id="g17"
+                                style="fill: {{recipe.color}};fill-opacity:1">
+                                <path
+                                d="m346 270c-17.9 0-33.984-7.881-45-20.361-11.016 12.48-27.1 20.361-45 20.361s-33.984-7.881-45-20.361c-11.016 12.48-27.1 20.361-45 20.361-33.076 0-60-26.909-60-60 0-16.787 6.826-32.461 18.633-43.696-2.373-10.269-3.633-20.933-3.633-31.304 0-74.443 60.557-135 135-135s135 60.557 135 135c0 10.591-1.289 21.284-3.779 31.421 11.924 11.294 18.779 26.924 18.779 43.579 0 33.091-26.924 60-60 60z"
+                                fill="#f0f7ff"
+                                id="path15"
+                                style="fill:{{recipe.color}};fill-opacity:1" />
+                            </g>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <a href="{{ path('recipe_like',{'id':recipe.id}) }}" class="btn btn-link js-like">
+                        {% if app.user and recipe.isLikedByUser(app.user) %}
+                        <i class="fas fa-heart"></i>
+                        {% else %}
+                        <i class="far fa-heart red"></i>
+                        {% endif %}
+                        <span class="js-recipeLikes">{{recipe.recipeLikes | length}}</span>
+                        <span class="js-label">J'aime</span>
+                    </a>
+
+                </div>  
+            </a>
+
+        {% endfor %}
+
+<section class = "lastestRecipes">
+
+    <h2>Les dernières recettes ajoutées<h2>
+
+        {% for recipe in lastRecipes %}
+
+            <a href="{{path('recipeDatasheet', {'id' : recipe.id}) }}">
+                <div class="recipeCard">
+                    <h3>{{ recipe.title }} </h3>
+
+                    <div class ="date"> Publiée le {{recipe.createdAt | date ('d/m/Y') }}</div>
+
+                    <div class="svgLogoContainer">
+                        <svg
+                        id="Capa_1"
+                        enable-background="new 0 0 512 512"
+                        height="100"
+                        viewBox="0 0 512 512"
+                        width="100"
+                        version="1.1">
+                        <defs
+                            id="defs32" />
+                        <g
+                            id="g27">
+                            <path
+                            d="m320.016 277.945 21.185-38.546c-14.401-2.1-25.201-14.399-25.201-29.399 0-8.401-6.599-15-15-15s-15 6.599-15 15c0 16.5-13.5 30-30 30s-30-13.5-30-30c0-8.401-6.599-15-15-15s-15 6.599-15 15c0 16.5-13.5 30-30 30-4.799 0-9.6 2.401-12.299 6.599-2.701 3.9-3.602 9.001-1.8 13.801l39 104.399 26.307-4.292-15.208 33.693 39.901 108.2c2.399 5.7 7.798 9.6 14.099 9.6s11.7-3.9 14.099-9.6l88.5-238.4z"
+                            fill="#ffffff"
+                            id="path2"
+                            style="fill:#ffbb33;fill-opacity:1" />
+                            <g
+                            id="Ice_Cream_1_"
+                            transform="translate(10e-4)"
+                            style="fill:#e68a2e;fill-opacity:1">
+                            <g
+                                id="g8"
+                                style="fill:#e68a2e;fill-opacity:1">
+                                <path
+                                d="m 360.099,260.4 -1.5,3.6 L 202,394.2 190.9,364.799 341.2,239.399 c 1.5,0.601 3,0.601 4.8,0.601 4.799,0 9.6,2.401 12.299,6.599 2.701,3.9 3.602,9.002 1.8,13.801 z"
+                                fill="#ffbb33"
+                                id="path6"
+                                style="fill:#e68a2e;fill-opacity:1" />
+                            </g>
+                            </g>
+                            <g
+                                id="g17"
+                                style="fill: {{recipe.color}};fill-opacity:1">
+                                <path
+                                d="m346 270c-17.9 0-33.984-7.881-45-20.361-11.016 12.48-27.1 20.361-45 20.361s-33.984-7.881-45-20.361c-11.016 12.48-27.1 20.361-45 20.361-33.076 0-60-26.909-60-60 0-16.787 6.826-32.461 18.633-43.696-2.373-10.269-3.633-20.933-3.633-31.304 0-74.443 60.557-135 135-135s135 60.557 135 135c0 10.591-1.289 21.284-3.779 31.421 11.924 11.294 18.779 26.924 18.779 43.579 0 33.091-26.924 60-60 60z"
+                                fill="#f0f7ff"
+                                id="path15"
+                                style="fill:{{recipe.color}};fill-opacity:1" />
+                            </g>
+                            </g>
+                        </svg>
+                    </div>
+
+
+                    <a href="{{ path('recipe_like',{'id':recipe.id}) }}" class="btn btn-link js-like">
+                        {% if app.user and recipe.isLikedByUser(app.user) %}
+                        <i class="fas fa-heart"></i>
+                        {% else %}
+                        <i class="far fa-heart red"></i>
+                        {% endif %}
+                        <span class="js-recipeLikes">{{recipe.recipeLikes | length}}</span>
+                        <span class="js-label">J'aime</span>
+                    </a>
+
+                </div>  
+            </a>
+
+        {% endfor %}
 
 
 {% endblock %}
