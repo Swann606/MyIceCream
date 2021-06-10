@@ -19,16 +19,28 @@ class RecipeLikeRepository extends ServiceEntityRepository
         parent::__construct($registry, RecipeLike::class);
     }
 
+
+    /**
+     * Renvoie les 8 recettes les plus likées
+     *
+     * @return void
+     */
     public function findMostLiked(){
 
         return $this  ->createQuerybuilder('r')
-                        ->select('r, COUNT(r.id) AS mycount' )
-                        ->orderBy('mycount', "desc")
+                        ->select('re.id')
+                        ->innerJoin('r.recipe', 're')
                         ->setMaxResults(8)
+                        ->orderBy('myCount', "desc")
                         ->getQuery()
                         ->getResult();
 
-
+ /*                        return $this  ->createQuerybuilder('r')
+                        ->select('r.recipe','count(r.recipe) as mycount')
+                        ->orderBy('mycount', "desc")
+                        ->setMaxResults(8)
+                        ->getQuery()
+                        ->getResult(); */
     }
 
     // /**

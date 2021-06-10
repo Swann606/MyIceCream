@@ -28,24 +28,21 @@ class HomeController extends AbstractController
      */
     public function home(RecipeRepository $recipeRepo, RecipeLikeRepository $recipeLikeRepo)
     {
-        $lastRecipes = $recipeRepo->findLatest(8);
+        $lastRecipes = $recipeRepo->findLatest();
 
 
-       /* A remplacer par une requete dans recipe */
-        $recipeLike=$recipeLikeRepo->findMostLiked();
 
-        foreach ($recipeLikes as $recipeLike){
-            $recipeID[]=$recipeLike->getRecipe()->getId(); 
-        }
- 
-        $recipeMostLike = $recipeRepo->findBy(['id' => $recipeID]);
-        
+        $popularRecipes=$recipeRepo->findMostPopular();
+   
+        dump($lastRecipes);
+        dump($popularRecipes);
 
         return $this->render('home/home.html.twig', [
             'lastRecipes' => $lastRecipes,
-            'RecipeMostLike' => $recipeMostLike
+             'popularRecipes' => $popularRecipes
         ]);
     }
+
 
      /**
      * @Route("/catalog", name="catalog")

@@ -22,51 +22,56 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-
-    /* public function findRecipeLikedByUser($userId)
-    {
-        $qb = $this->createQueryBuilder('r')
-                    ->Select('r')
-                    ->Join('r.recipeLike','rl')
-                    ->Join('rl.user', 'u')
-                    ->Where('rl.user_id = $userId')
-                    ->getQuery()
-                    ->getResult();
-
-                    dump($qb);
-    }    */
-
-
     /**
      * Renvoie les X dernières recettes publiées
      *
      * @param [Integer] $x
      * @return void
      */
-        public function findLatest($x)
+        public function findLatest()
         {
             return $this ->createQuerybuilder('r')
                         ->orderBy('r.createdAt', "desc")
-                        ->setMaxResults($x)
+                        ->setMaxResults(8)
                         ->getQuery()
                         ->getResult();
         }
 
-        /**
-         * Renvoie les X recettes avec le plus de like          *
-         * @param [Integer] $x
-         * @return void
-         */
-        public function findMostPopular($x){
-                $qb= $this ->createQuerybuilder('r')
-                            ->select($qb->expr()->countDistinct('c.id'))
-                            ->orderBy('r.recipe_like', "asc")
-                            ->setMaxResults($x)
-                            ->getQuery()
-                            ->getResult();
+    /**
+     * Renvoie les 8 recettes les plus likées
+     *
+     * @return void
+     */
+    public function findMostPopular(){
 
-                return $qb;
-        } 
+            $qb = $this ->createQuerybuilder('r');
+            return $qb  ->select('r')
+                        ->innerJoin('r.recipeLikes', 'rl')
+                        ->setMaxResults(8)
+                        ->groupBy('r')
+                        ->orderBy( $qb->expr()->countDistinct('r.id'), 'DESC')
+                        ->getQuery()
+                        ->getResult();
+
+    }
+
+    /**
+     * Renvoie les recettes likées par l'utilisateur connecté
+     *
+     * @return void
+     */
+    public function findLikedByUser($userId){
+
+        return $this  ->createQuerybuilder('r')
+                        ->select('r')
+                        ->innerJoin('r.recipeLikes', 'rl')
+                        ->innerJoin('rl.user', 'u')
+                        ->where('u.id = :userId')
+                        ->setParameter('userId', $userId)
+                        ->getQuery()
+                        ->getResult();
+
+    }
 
     // /**
     //  * @return Recipe[] Returns an array of Recipe objects

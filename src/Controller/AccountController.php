@@ -15,7 +15,7 @@ class AccountController extends AbstractController
 {
  
     /**
-     * @Route("/account/{id}", name="account")
+     * @Route("/account", name="account")
      */
     public function account(RecipeRepository $recipeRepo, RecipeLikeRepository $recipeLikeRepo)
     {
@@ -24,15 +24,7 @@ class AccountController extends AbstractController
         
         $recipes = $recipeRepo->findBy(['user'=> $user]);
 
-        /* A remplacer par une requete dans recipe */
-        $recipeLikes = $recipeLikeRepo->findBy(['user'=> $user]);
-
-       foreach ($recipeLikes as $recipeLike){
-           $recipeID[]=$recipeLike->getRecipe()->getId(); 
-       }
-
-       $recipeLiked = $recipeRepo->findBy(['id' => $recipeID]);
-
+        $recipeLiked=$recipeRepo->findLikedByUser($user->getId());
 
         return $this->render('account/account.html.twig', [
             'user'=>$user,
