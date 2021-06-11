@@ -3,7 +3,7 @@
 
 {% block body %}
 
-    <h1> Partage ta recette </h1>
+    <h1 class="pal mega"> Partage ta recette </h1>
 
     {# {% form_theme formRecipe 'bootstrap_4_layout.html.twig' %}  #}
 
@@ -27,7 +27,7 @@
 
 
         {% if app.user %}
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="center medium">
 
                 {% if editMode %}
                     Enregistrer les modifications
@@ -41,8 +41,8 @@
 
         {% else %}
 
-        <h4>Connecte-toi pour laisser un commentaire</h4>
-        <button href ="{{path('security_login')}}" class="btn btn-success">Se Connecter</button>
+        <h4 class="tc">Connecte-toi pour partager tes meilleures recettes</h4>
+        <button href ="{{path('security_login')}}" class="center medium">Se Connecter</button>
 
         {% endif %}
 

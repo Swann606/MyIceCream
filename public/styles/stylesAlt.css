@@ -9,10 +9,6 @@
 	4. États
 	5. Thème
 
-	 Documentation :
-	-------------------------
-	• SMACSS : http://smacss.com/files/smacss-fr.pdf
-	• Typo : https://everythingfonts.com/ttf-to-woff2 
 		 
 */
 
@@ -115,7 +111,7 @@ figure img { display: inline-block !important; }
 .big { font-size: 1.2em !important; }
 .bigger { font-size: 1.5em !important;  }
 .biggest { font-size: 2em !important; }
-.mega { font-size: 4em !important; }
+.mega { font-size: 3em !important; }
 
 /* Text effect */
 .up { text-transform: uppercase; }
@@ -128,9 +124,9 @@ figure img { display: inline-block !important; }
 .black { color: #000 !important; }
 .grey { color: #565656 !important; }
 
-.yes, .green { color: #3e9c30 !important; }
+.yes { color: #3e9c30 !important; }
 .orange { color: orange !important; }
-.no, .red { color: #9f2d2d !important; }
+.no { color: #9f2d2d !important; }
 
 .checked { color: #1ba238 !important; opacity: 1 !important; }
 
@@ -318,9 +314,6 @@ img.fl, img.fr { margin-bottom: 0.5rem; }
 	font-family: sans-serif;
 
 	display: block;
-	width: 150px;
-
-	/* padding: .5rem 1rem; */
 
 	line-height: 1;
 
@@ -362,6 +355,10 @@ img.fl, img.fr { margin-bottom: 0.5rem; }
 
 .blue{color: #0083A2 !important};
 
+.red{color: red};
+
+.yellow{color:#F8A900};
+
 /*grid spécifique */
 
 .grid-6
@@ -375,6 +372,12 @@ img.fl, img.fr { margin-bottom: 0.5rem; }
 	display : grid;
 	grid-template-columns:repeat(4,minmax(0,1fr));
 } 
+
+.grid-2
+{
+	display : grid;
+	grid-template-columns:repeat(2,minmax(0,1fr));
+}
 /*menu*/
 
 header{
@@ -411,6 +414,10 @@ a, a:visited {color: #004455;}
 
 a:hover {color: #20bd8e;}
 
+a.bt{
+	width: 150px;
+}
+
 .pacifico{font-family: 'Pacifico', cursive;}
 
 .content{margin-top: 100px;}
@@ -430,7 +437,6 @@ a:hover {color: #20bd8e;}
 	margin-top: 100px;
 }
 
-
 .recipeCard{
 	color : #004455;
 	border : 1px solid lightgray;
@@ -444,6 +450,10 @@ a:hover {color: #20bd8e;}
 	height : 70px;
 }
 
+section {
+	padding-bottom:100px;
+}
+
 /*couleur spécifique*/
 
 .bg-white{background-color: white;}
@@ -455,12 +465,20 @@ a:hover {color: #20bd8e;}
 
 /* formulaire*/
 
-label { font-size: 1.5rem;}
+label { font-size: 2rem;}
 
 input, textarea , select, option{
+	display:block;
 	border:none;
-	font-size: 1.5rem;
+	font-size: 2rem;
 	background-color: #06bae231;
+	width: 250px;
+}
+
+textarea{
+	width: 400px;
+	height :150px;
+	font-size : 1.5rem;
 }
 
 .form-group {
@@ -469,4 +487,7 @@ input, textarea , select, option{
 	margin-right: auto;
 
 	font-size: 2rem;
+
+	padding: 1rem; 
+
 }

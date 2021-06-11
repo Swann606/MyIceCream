@@ -2,16 +2,23 @@
 
 {% block body %}
 
-    <h1>Inscription</h1>
+    <h1 class="mega pal">Inscription</h1>
+
+    <form  class="form-group center w50" action="{{path('security_registration')}}" method="post">
+    
+
+            <input placeholder="Nom" required type="text" name="_username" class="center mbm tc block">
+
+            <input placeholder="Adresse email" required type="text" name="_email" class="center mbm tc block">
+
+            <input placeholder="Mot de passe" required type="password" name="_password" class="center mbm tc block">
+
+            <input placeholder="Mot de passe" required type="password" name="_confirm_password" class="center mbl tc block">
 
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
+            <button type="submit" class="center bold mbl tc medium">Je m'inscris</button>
 
-    <button type="submit" class="btn btn-success">Je m'inscris</button>
-
-    {{form_end(form)}}
-
+        </form>
 
 
 {% endblock %}
