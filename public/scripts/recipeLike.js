@@ -1,9 +1,9 @@
 function onClickBtnLike(event){
     event.preventDefault();
-    console.log("pass")
+    console.log("pass");
 
     const url = this.href;
-    const spanCount = this.querySelector('span.js-recipelikes');
+    const spanCount = this.querySelector('span.js-recipeLikes');
     const  icone = this.querySelector('i');
 
     axios.get(url).then(function(response){
@@ -21,6 +21,6 @@ function onClickBtnLike(event){
    }); 
 }
 
-document.querySelectorAll('a.js-recipeLike').forEach(function(link){
+document.querySelectorAll('a.js-like').forEach(function(link){
     link.addEventListener('click', onClickBtnLike)
 });
