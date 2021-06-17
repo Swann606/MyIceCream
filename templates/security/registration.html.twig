@@ -4,7 +4,35 @@
 
     <h1 class="mega pal">Inscription</h1>
 
-    <form  class="form-group center w50" action="{{path('security_registration')}}" method="post">
+    <div class="form-group center w50">
+    {{ form_start(form) }}
+
+    {{ form_errors (form.username, {'attr': { 'class' : 'error' }}) }}
+
+    {{ form_widget (form.username, {'attr': {'placeholder' : "Nom" , 'class' : 'center tc' }}) }}<br>
+
+
+    {{ form_widget (form.email, {'attr': {'placeholder' : "Adresse e-mail" , 'class' : 'center tc' }}) }}<br>
+
+
+    {{ form_errors (form.password, {'attr': { 'class' : 'error' }}) }}
+
+    {{ form_widget(form.password, {'attr': {'placeholder' :'Mot de passe' , 'class' : 'center tc' }}) }}<br>
+
+
+    {{ form_errors (form.confirm_password, {'attr': { 'class' : 'error' }}) }}
+
+    {{ form_widget(form.confirm_password, {'attr': {'placeholder' :'Mot de passe' , 'class' : 'center tc' }}) }}<br>
+
+
+    <button type="submit" class="center bold mbl tc medium">Je m'inscris</button>
+
+    
+    {{form_end(form)}}
+    </div>
+
+
+{#     <form  class="form-group center w50" action="{{path('security_registration')}}" method="post">
     
 
             <input placeholder="Nom" required type="text" name="_username" class="center mbm tc block">
@@ -14,11 +42,10 @@
             <input placeholder="Mot de passe" required type="password" name="_password" class="center mbm tc block">
 
             <input placeholder="Mot de passe" required type="password" name="_confirm_password" class="center mbl tc block">
-
-
+ 
             <button type="submit" class="center bold mbl tc medium">Je m'inscris</button>
 
-        </form>
+    </form> #}
 
 
 {% endblock %}

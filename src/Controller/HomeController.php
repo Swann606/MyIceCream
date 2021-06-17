@@ -31,11 +31,8 @@ class HomeController extends AbstractController
         $lastRecipes = $recipeRepo->findLatest();
 
 
-
         $popularRecipes=$recipeRepo->findMostPopular();
    
-        dump($lastRecipes);
-        dump($popularRecipes);
 
         return $this->render('home/home.html.twig', [
             'lastRecipes' => $lastRecipes,
@@ -57,8 +54,6 @@ class HomeController extends AbstractController
     }
 
 
-
-    
 
     /**
      * @Route("/recipe/create", name="create_recipe")
@@ -202,7 +197,23 @@ class HomeController extends AbstractController
             'message' => 'Like bien ajouté',
             'recipeLikes' => $recipeLikeRepo->count(['recipe' => $recipe])
         ],200);
+
     }
 
     
+    /**
+     * 
+     * permet de supprimer le requete sélectionnée
+     * 
+    * @Route("/recipe/{id}/delete", name="recipeDelete")
+    */
+    public function removeRecipe(Recipe $recipe, EntityManagerInterface $manager)
+    {
+        //ajouter vérification avant
+        $manager->remove($recipe);
+        $manager->flush();
+
+        return $this->redirectToRoute('account');
+    }
+
 }

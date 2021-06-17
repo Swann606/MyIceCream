@@ -121,7 +121,7 @@ class User implements UserInterface
         return $this;
     }
 
- /*    public function getConfirm_password(): ?string
+     public function getConfirm_password(): ?string
     {
         return $this->confirm_password;
     }
@@ -131,7 +131,7 @@ class User implements UserInterface
         $this->confirm_password = $confirm_password;
 
         return $this;
-    } */
+    } 
 
     public function getCreatedAt(): ?\DateTimeInterface
     {

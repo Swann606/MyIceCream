@@ -1,89 +1,56 @@
 {% extends 'base.html.twig'%}
 
-
-
 {% block body %}
 
             <articles>
-                <h3>{{ recipe.title }}</h3>
-                
-                <div class="category">{{recipe.category.title}}</div>
+                    <div>
+                        {% if app.user == recipe.user %}
+                            <a href="{{ path('edit_recipe',{'id':recipe.id}) }}" class="bt medium inbl mas">Modifier</a>
+                            <a href="{{ path('recipeDelete',{'id':recipe.id}) }}" class="bt delete medium inbl mas">Supprimer</a>
+                            
+                        {% endif %}
+                    </div><br>
 
-                <div class ="date"> Publiée le {{recipe.createdAt | date ('d/m/Y') }}</div>
+                <h1 class="mega">{{ recipe.title }}</h1>
 
-                <div class="svgLogoContainer">
+                <div class="w80 center bold">Crée par : {{recipe.user}}</div>
+
+                <div class="w80 center bold">Type de dessert :{{recipe.category.title}}</div>
+
+                <div class ="w80 center bold"> Publiée le {{recipe.createdAt | date ('d/m/Y') }}</div>
+
+                <div class="iceSvgBig center mtm mbl">
                     <svg
-                        xmlns:dc="http://purl.org/dc/elements/1.1/"
-                        xmlns:cc="http://creativecommons.org/ns#"
-                        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                        xmlns:svg="http://www.w3.org/2000/svg"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-                        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-                        id="Capa_1"
-                        enable-background="new 0 0 512 512"
-                        height="100"
-                        viewBox="0 0 512 512"
-                        width="100"
-                        version="1.1"
-                        sodipodi:docname="ice-cream_strawbery.svg"
-                        inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
-                        <metadata
-                            id="metadata34">
-                            <rdf:RDF>
-                            <cc:Work
-                                rdf:about="">
-                                <dc:format>image/svg+xml</dc:format>
-                                <dc:type
-                                rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-                                <dc:title></dc:title>
-                            </cc:Work>
-                            </rdf:RDF>
-                        </metadata>
-                        <defs
-                            id="defs32" />
-                        <sodipodi:namedview
-                            pagecolor="#ffffff"
-                            bordercolor="#666666"
-                            borderopacity="1"
-                            objecttolerance="10"
-                            gridtolerance="10"
-                            guidetolerance="10"
-                            inkscape:pageopacity="0"
-                            inkscape:pageshadow="2"
-                            inkscape:window-width="2100"
-                            inkscape:window-height="1234"
-                            id="namedview30"
-                            showgrid="false"
-                            inkscape:zoom="1.4355469"
-                            inkscape:cx="256"
-                            inkscape:cy="256"
-                            inkscape:window-x="-9"
-                            inkscape:window-y="25"
-                            inkscape:window-maximized="1"
-                            inkscape:current-layer="g27" />
-                        <g
-                            id="g27">
-                            <path
-                            d="m320.016 277.945 21.185-38.546c-14.401-2.1-25.201-14.399-25.201-29.399 0-8.401-6.599-15-15-15s-15 6.599-15 15c0 16.5-13.5 30-30 30s-30-13.5-30-30c0-8.401-6.599-15-15-15s-15 6.599-15 15c0 16.5-13.5 30-30 30-4.799 0-9.6 2.401-12.299 6.599-2.701 3.9-3.602 9.001-1.8 13.801l39 104.399 26.307-4.292-15.208 33.693 39.901 108.2c2.399 5.7 7.798 9.6 14.099 9.6s11.7-3.9 14.099-9.6l88.5-238.4z"
-                            fill="#ffffff"
-                            id="path2"
-                            style="fill:#ffbb33;fill-opacity:1" />
+                            id="Capa_1"
+                            enable-background="new 0 0 512 512"
+                            height="150"
+                            viewBox="0 0 512 512"
+                            width="150"
+                            version="1.1">
+                            <defs
+                                id="defs32" />
                             <g
-                            id="Ice_Cream_1_"
-                            transform="translate(10e-4)"
-                            style="fill:#e68a2e;fill-opacity:1">
-                            <g
-                                id="g8"
-                                style="fill:#e68a2e;fill-opacity:1">
+                                id="g27">
                                 <path
-                                d="m 360.099,260.4 -1.5,3.6 L 202,394.2 190.9,364.799 341.2,239.399 c 1.5,0.601 3,0.601 4.8,0.601 4.799,0 9.6,2.401 12.299,6.599 2.701,3.9 3.602,9.002 1.8,13.801 z"
-                                fill="#ffbb33"
-                                id="path6"
-                                style="fill:#e68a2e;fill-opacity:1" />
-                            </g>
-                            </g>
-                            <g
+                                d="m320.016 277.945 21.185-38.546c-14.401-2.1-25.201-14.399-25.201-29.399 0-8.401-6.599-15-15-15s-15 6.599-15 15c0 16.5-13.5 30-30 30s-30-13.5-30-30c0-8.401-6.599-15-15-15s-15 6.599-15 15c0 16.5-13.5 30-30 30-4.799 0-9.6 2.401-12.299 6.599-2.701 3.9-3.602 9.001-1.8 13.801l39 104.399 26.307-4.292-15.208 33.693 39.901 108.2c2.399 5.7 7.798 9.6 14.099 9.6s11.7-3.9 14.099-9.6l88.5-238.4z"
+                                fill="#ffffff"
+                                id="path2"
+                                style="fill:#ffbb33;fill-opacity:1" />
+                                <g
+                                id="Ice_Cream_1_"
+                                transform="translate(10e-4)"
+                                style="fill:#e68a2e;fill-opacity:1">
+                                <g
+                                    id="g8"
+                                    style="fill:#e68a2e;fill-opacity:1">
+                                    <path
+                                    d="m 360.099,260.4 -1.5,3.6 L 202,394.2 190.9,364.799 341.2,239.399 c 1.5,0.601 3,0.601 4.8,0.601 4.799,0 9.6,2.401 12.299,6.599 2.701,3.9 3.602,9.002 1.8,13.801 z"
+                                    fill="#ffbb33"
+                                    id="path6"
+                                    style="fill:#e68a2e;fill-opacity:1" />
+                                </g>
+                                </g>
+                                <g
                                     id="g17"
                                     style="fill: {{recipe.color}};fill-opacity:1">
                                     <path
@@ -93,39 +60,45 @@
                                     style="fill:{{recipe.color}};fill-opacity:1" />
                                 </g>
                                 </g>
-                            
                             </svg>
-                </div>
+                    </div>
                 
-                <div class ="ingredient_list">  {{recipe.ingredients}}</div>
-                <div class ="description">  {{recipe.description}}</div>
+               
+                <h2>Ingredients</h2>
+                <div class ="ingredient_list w80 center">  {{recipe.ingredients |
+                nl2br}}</div><br>
 
-                <a href="{{ path('recipe_like',{'id':recipe.id}) }}" class="btn btn-link js-recipeLike">
-                    {# icone à remplacer par des SVG #}
-                    {% if app.user and recipe.isLikedByUser(app.user) %}
+                <h2>Description</h2>
+                <div class ="description w80 center">  {{recipe.description | nl2br}}</div><br>
+
+                <div class="center w20">  
+                    <a href="{{ path('recipe_like',{'id':recipe.id}) }}" class="js-like red big tc">
+                        {% if app.user and recipe.isLikedByUser(app.user) %}
                         <i class="fas fa-heart"></i>
                         {% else %}
-                        <i class="far fa-heart red"></i>
+                        <i class="far fa-heart"></i>
                         {% endif %}
-                    <span class="js-recipeLikes">{{recipe.recipeLikes | length}}</span>
-                    <span class="js-label">J'aime</span>
-                </a>
+                        <span class="js-recipeLikes">{{recipe.recipeLikes | length}}</span>
+                        <span class="js-label">J'aime</span>
+                    </a>
+                </div>  
 
             </articles> 
 
             <section id = 'commentaires'><br>
+
+            <div class="center w80">
                 <H4>{{recipe.comments | length}} commentaire(s) :</H4>
 
-                <br>
 
                 {% for comment in recipe.comments  %}
-                    <div class="comment">
-                        <div class="row">
-                            <div class="col-3">
-                                {{comment.author}}                                       
+                    <div class="">
+                        <div class="grid-comment">
+                            <div class="">
+                                <span class="bold">{{comment.author}}</span><br>
                                 {{comment.createdAt | date ('d/m/Y à H:i')}}
                             </div>
-                            <div class="col">
+                            <div class="">
                                 {{comment.content}}
                             </div>
                         </div>
@@ -134,20 +107,22 @@
 
                 {% if app.user %}
                     {{form_start(commentForm)}}
-                    {{form_row(commentForm.content, {'attr': {'placeholder': "Votre commentaire"}})}}
+                    {{form_widget(commentForm.content, {'attr': {'placeholder': "Votre commentaire", 'class':'w100'}})}}
 
-                    <button type="submit" class="btn btn-success">Envoyer</button>
+                    <button type="submit" class="mtl mbl medium">Envoyer</button>
 
                 {{form_end(commentForm)}}
                     
                 {% else %}
 
                 <h4>Connecte-toi pour laisser un commentaire</h4>
-                <button href ="{{path('security_login')}}" class="btn btn-success">Se Connecter</button>
+                <div class="pbl">
+                    <a href ="{{path('security_login')}}" class="bt medium mtl">Se Connecter</a>
+                </div>
 
                 {% endif %}
 
-                
+                </div>
             </section>
 
 

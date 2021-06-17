@@ -246,7 +246,7 @@ s,m,l,n = small, medium, large, none*/
 img.fl, img.fr { margin-bottom: 0.5rem; }
 
 /* Table layout */
-.inbl {	display: inline-block; vertical-align: top; }
+.inbl {	display: inline-block !important; vertical-align: top; }
 .inline { display: inline !important; }
 .block { display: block !important; }
 .none, .editable-hidden { display: none; }
@@ -324,8 +324,15 @@ img.fl, img.fr { margin-bottom: 0.5rem; }
 	overflow: hidden;
 
 	transition: all 0.4s;
-
 }
+
+.bt.delete{
+	border-color: #9f2d2d;
+	background-color: #9f2d2d;
+}
+
+
+
 	.bt:focus, input[type="button"]:focus, button:focus {
 	  -webkit-tap-highlight-color: transparent;
 	  -webkit-user-select: none;
@@ -342,12 +349,18 @@ img.fl, img.fr { margin-bottom: 0.5rem; }
 		text-decoration: none;
 		box-shadow: none;
 	}
-		.bt a:hover { color: #fff !important; }
+
+	.bt.delete:hover{
+		border-color: #9f2d2d;
+		background-color:white;
+		color: #9f2d2d !important;
+	}
+
+	.bt a:hover { color: #fff !important; }
 
 	.bt:active, button:active { 
 		box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2) inset, 0 100px 0 rgba(0, 0, 0, 0.1) inset;
 	}
-
 
 
 /*grid spécifique */
@@ -369,6 +382,14 @@ img.fl, img.fr { margin-bottom: 0.5rem; }
 	display : grid;
 	grid-template-columns:repeat(2,minmax(0,1fr));
 }
+
+.grid-comment
+{
+	display : grid;
+	grid-template-columns:1fr 3fr;
+}
+
+
 /*menu*/
 
 header{
@@ -411,7 +432,10 @@ a.bt{
 
 .pacifico{font-family: 'Pacifico', cursive;}
 
-.content{margin-top: 100px;}
+.content{
+	margin-top: 100px;
+	min-height: calc(100vh - 250px);
+}
 
 .welcome{
 	background-color: rgba(255, 255, 255, 0.7);
@@ -436,13 +460,22 @@ a.bt{
 	height: 250px;
 }
 
+.mh3em {
+	min-height: 3em;
+}
+
 .iceSvg{
 	width : 70px;
 	height : 70px;
 }
 
+.iceSvgBig{
+	width : 150px;
+	height : 150px;
+}
+
 section {
-	padding-bottom:100px;
+	padding-top:100px;
 }
 
 /* formulaire*/
@@ -467,20 +500,26 @@ textarea{
 	max-width:500px;
 	margin-left: auto;
 	margin-right: auto;
-
-	font-size: 2rem;
-
 	padding: 1rem; 
+	font-size: 2rem;
+}
 
+.form-group li {
+	font-size: 1rem;
+	color: #9f2d2d !important;
 }
 
 /*couleur spécifique*/
 
 .bg-white{background-color: white;}
 
-.blueGreen{color: #004455};
+.bg-lightBlue {background-color: #06bae231;}
 
-.blue{color: #0083A2 !important};
+.bg-brown {background-color:#272422;}
 
-.red{color: red !important};
+.blueGreen{color: #004455;}
+
+.blue{color: #0083A2 !important;}
+
+.red{color: red !important;}
 

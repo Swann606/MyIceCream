@@ -4,7 +4,7 @@
 {% block body %}
 
 
-    <section class ="mw960p">
+    <section class ="mw960p ptn">
 
         <img class="w100" src="{{asset('/img/welcome_img.jpg')}}" alt="Image d'illustration : bol de glace à la pistache">
 
@@ -47,15 +47,15 @@
 
         {% for recipe in lastRecipes %}
 
-            <div class="recipeCard center pas mbs">
+            <div class="recipeCard center pas mbs mtm mbm">
 
                 <a href="{{path('recipeDatasheet', {'id' : recipe.id}) }}">
 
-                    <h3 class= "h5-like tc mtn mbn">{{ recipe.title }}</h3>
+                    <h3 class= "h5-like tc mtn mbn mh3em">{{ recipe.title }}</h3>
 
                     <div class ="auteur h6-like tc blue"> par {{recipe.user}}</div>
 
-                    <div class="iceSvg center mtm mbm">
+                    <div class="iceSvg center mtm mbl">
                         <svg
                         id="Capa_1"
                         enable-background="new 0 0 512 512"
@@ -99,14 +99,14 @@
                         </svg>
                     </div>
 
-                    <a href="{{ path('recipe_like',{'id':recipe.id}) }}" class="btn btn-link js-like ">
+                    <a href="{{ path('recipe_like',{'id':recipe.id}) }}" class="js-like red">
                         {% if app.user and recipe.isLikedByUser(app.user) %}
-                        <i class="fas fa-heart red"></i>
+                        <i class="fas fa-heart"></i>
                         {% else %}
-                        <i class="far fa-heart red"></i>
+                        <i class="far fa-heart"></i>
                         {% endif %}
-                        <span class="js-recipeLikes red">{{recipe.recipeLikes | length}}</span>
-                        <span class="js-label red">J'aime</span>
+                        <span class="js-recipeLikes">{{recipe.recipeLikes | length}}</span>
+                        <span class="js-label">J'aime</span>
                     </a>
                 </a>    
             </div>  
@@ -123,15 +123,15 @@
 
             {% for recipe in popularRecipes %}
 
-            <div class="recipeCard center pas mbs">
+                        <div class="recipeCard center pas mbs mtm mbm">
 
                 <a href="{{path('recipeDatasheet', {'id' : recipe.id}) }}">
 
-                    <h3 class= "h5-like tc mtn mbn">{{ recipe.title }}</h3>
+                    <h3 class= "h5-like tc mtn mbn mh3em">{{ recipe.title }}</h3>
 
-                    <div class =" h6-like tc blue"> par {{recipe.user}}</div>
+                    <div class ="auteur h6-like tc blue"> par {{recipe.user}}</div>
 
-                    <div class="iceSvg center mtm mbm">
+                    <div class="iceSvg center mtm mbl">
                         <svg
                         id="Capa_1"
                         enable-background="new 0 0 512 512"
@@ -175,11 +175,11 @@
                         </svg>
                     </div>
 
-                    <a href="{{ path('recipe_like',{'id':recipe.id}) }}" class="btn btn-link js-like">
+                    <a href="{{ path('recipe_like',{'id':recipe.id}) }}" class="js-like red">
                         {% if app.user and recipe.isLikedByUser(app.user) %}
                         <i class="fas fa-heart"></i>
                         {% else %}
-                        <i class="far fa-heart red"></i>
+                        <i class="far fa-heart"></i>
                         {% endif %}
                         <span class="js-recipeLikes">{{recipe.recipeLikes | length}}</span>
                         <span class="js-label">J'aime</span>
