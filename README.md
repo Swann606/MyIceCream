@@ -6,4 +6,4 @@ Ce projet a été demarré dans le cadre de ma licence en développement Web. Il
 
 La base de données de développement mic.sql se trouve dans le dossier databaseTest.
 
-Attention: Non-responsive. Une nouvelle version avec un front en vueJS es prévue.
+Attention: Non-responsive. Une nouvelle version avec un front en vueJS est prévue.
